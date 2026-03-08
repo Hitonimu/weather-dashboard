@@ -1,14 +1,11 @@
-/**
- * components/Navbar.jsx - Updated with Cenayang Cuaca + initials
- */
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Thermometer } from 'lucide-react'
+import { Search, Thermometer, Sun, Moon } from 'lucide-react'
 import { useWeather } from '../context/WeatherContext'
 import { format } from 'date-fns'
 
 export default function Navbar() {
-  const { city, selectCity, unit, toggleUnit } = useWeather()
+  const { city, selectCity, unit, toggleUnit, isDark, toggleTheme } = useWeather()
   const [query, setQuery] = useState('')
 
   const handleSearch = (e) => {
@@ -24,7 +21,7 @@ export default function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="h-[68px] flex-shrink-0 flex items-center justify-between px-4 lg:px-8 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/30 dark:border-slate-800/50 sticky top-0 z-30"
+      className="h-[68px] flex-shrink-0 flex items-center justify-between px-4 lg:px-8 pl-16 lg:pl-8 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/30 dark:border-slate-800/50 sticky top-0 z-30"
     >
       <form onSubmit={handleSearch} className="flex-1 max-w-sm">
         <div className="relative">
@@ -50,6 +47,16 @@ export default function Navbar() {
           <Thermometer size={14} />
           {unit === 'metric' ? '°C' : '°F'}
         </motion.button>
+
+        {/* Dark mode di navbar */}
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all"
+        >
+          {isDark ? <Sun size={16} /> : <Moon size={16} />}
+        </motion.button>
+
         <div className="h-6 w-px bg-slate-200 dark:bg-slate-700" />
         <div className="hidden sm:flex items-center gap-2.5">
           <div className="text-right">
