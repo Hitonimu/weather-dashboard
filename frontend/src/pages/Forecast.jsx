@@ -55,7 +55,7 @@ export default function Forecast() {
         <h2 className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-4">
           7-Day Forecast
         </h2>
-        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
+       <div className="flex gap-4 overflow-x-auto py-3 px-1 scrollbar-thin">
           {fLoading
             ? Array.from({ length: 7 }).map((_, i) => (
                 <div key={i} className="flex-shrink-0 w-28 h-44 glass-card animate-pulse" />
