@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ───────────────────────────────────────────────────────── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Glassmorphism utilities ────────────────────────────────────────────── */
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl border border-white/20;
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .dark .glass {
+    background: rgba(30, 41, 59, 0.65);
+    @apply border-white/10;
+  }
+
+  .glass-card {
+    @apply glass rounded-3xl shadow-glass transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply shadow-card-hover -translate-y-0.5;
+    transform: translateY(-2px);
+  }
+
+  .sidebar-icon {
+    @apply p-3 rounded-2xl text-slate-400 hover:bg-white/60 dark:hover:bg-slate-800/60 
+           hover:text-primary transition-all duration-200 cursor-pointer;
+  }
+
+  .sidebar-icon.active {
+    @apply bg-primary/10 text-primary;
+  }
+
+  .weather-stat-card {
+    @apply glass-card p-5 flex flex-col gap-3;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-white font-semibold px-5 py-2.5 
+           rounded-2xl transition-all duration-200 shadow-md hover:shadow-blue-glow;
+  }
+
+ .input-field {
+  @apply w-full bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 
+         rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40
+         placeholder:text-slate-400 transition-all duration-200
+         text-slate-800 dark:text-slate-100;
+}
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 4px;
+  }
+}
+
+/* ── Leaflet map tweaks ─────────────────────────────────────────────────── */
+.leaflet-container {
+  border-radius: 1.75rem;
+  z-index: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 1rem !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
+}
+
+/* ── Recharts tweaks ────────────────────────────────────────────────────── */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* ── Page transition ────────────────────────────────────────────────────── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* ── Scrollbar for dark mode ────────────────────────────────────────────── */
+:root {
+  color-scheme: light dark;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 3px;
+}
+
+/* ── Weather icon animation ─────────────────────────────────────────────── */
+.weather-icon-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(2deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+/* ── Gradient mesh background ───────────────────────────────────────────── */
+.mesh-bg {
+  background-color: #f0f4f8;
+  background-image: 
+    radial-gradient(at 40% 20%, hsla(214, 100%, 76%, 0.25) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(189, 100%, 70%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 60%, hsla(240, 100%, 88%, 0.15) 0px, transparent 50%);
+}
+
+.dark .mesh-bg {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(at 40% 20%, hsla(214, 80%, 20%, 0.4) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(220, 80%, 15%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 0% 60%, hsla(240, 60%, 12%, 0.3) 0px, transparent 50%);
+}
